@@ -26,6 +26,7 @@ public class ServerService extends Thread {
     private boolean isRunning;
     private ServerSocket serverSocket;
 
+
     @Override
     public void run() {
         isRunning = true;
@@ -99,15 +100,20 @@ public class ServerService extends Thread {
 
                         Geocoder geocoder = new Geocoder(context);
                         List<Address> addressList = geocoder.getFromLocation(jsonParams.getDouble("lat"), jsonParams.getDouble("lng"), 1);
-                        String address = addressList.get(0).getAddressLine(0);
+                        String address ;
+                        if (addressList.size() > 0) {
+                            address = addressList.get(0).getAddressLine(0);
+                        } else {
+                            address = "No address";
+                        }
+
                         String responseHeaders = "HTTP/1.1 200 OK\r\n" +
                                 "Content-Type: application/json\r\n" +
                                 "Connection: close\r\n\r\n";
 
 
-
                         JSONObject jsonParams2 = new JSONObject();
-                        jsonParams2.put("address",address);
+                        jsonParams2.put("address", address);
 
                         // Convert the JSONObject to a JSON string
                         String jsonResponse = jsonParams2.toString();

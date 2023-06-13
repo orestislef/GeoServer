@@ -1,6 +1,7 @@
 package gr.orestislef.geoserver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 
@@ -100,7 +101,7 @@ public class ServerService extends Thread {
 
                         Geocoder geocoder = new Geocoder(context);
                         List<Address> addressList = geocoder.getFromLocation(jsonParams.getDouble("lat"), jsonParams.getDouble("lng"), 1);
-                        String address ;
+                        String address;
                         if (addressList.size() > 0) {
                             address = addressList.get(0).getAddressLine(0);
                         } else {
@@ -126,6 +127,15 @@ public class ServerService extends Thread {
                         outputStream.write(response.getBytes());
                         outputStream.flush();
                         System.out.println("Sent response: " + response);
+
+                        // Create an intent with the broadcast action
+                        Intent intent = new Intent("com.example.ACTION_VIEW_CHANGE");
+                        intent.putExtra("lat", Double.toString(jsonParams.getDouble("lat")));
+                        intent.putExtra("lng", Double.toString(jsonParams.getDouble("lat")));
+                        intent.putExtra("response", jsonResponse);
+
+                        // Send the broadcast
+                        context.sendBroadcast(intent);
                     }
                 }
             }

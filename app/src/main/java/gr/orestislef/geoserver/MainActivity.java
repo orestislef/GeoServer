@@ -2,7 +2,10 @@ package gr.orestislef.geoserver;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,6 +16,40 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BroadcastReceiver viewChangeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Handle the broadcast and change the view accordingly
+            String lat = intent.getStringExtra("lat");
+            String lng = intent.getStringExtra("lng");
+            String response = intent.getStringExtra("response");
+            changeView(lat,lng,response);
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Register the BroadcastReceiver to receive the broadcast
+        IntentFilter filter = new IntentFilter("com.example.ACTION_VIEW_CHANGE");
+        registerReceiver(viewChangeReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Unregister the BroadcastReceiver when the activity is paused
+        unregisterReceiver(viewChangeReceiver);
+    }
+
+    private void changeView(String lat, String lng, String response) {
+        String latLng = "lat: "+lat + "lng: "+lng;
+        requestTV.setText(latLng);
+
+        responseTV.setText(response);
+    }
+
+    TextView requestTV, responseTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         TextView ipTV = findViewById(R.id.ipTV);
         String ipAndPort = getDeviceIPAddress() + ":" + ServerService.PORT;
         ipTV.setText(ipAndPort);
+
+        requestTV = findViewById(R.id.requestTV);
+        responseTV = findViewById(R.id.responseTV);
     }
 
     public String getDeviceIPAddress() {

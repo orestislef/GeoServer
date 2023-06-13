@@ -22,7 +22,7 @@ public class ServerService extends Thread {
         this.context = context;
     }
 
-    private static final int PORT = 8080;
+    public static final int PORT = 8080;
     private boolean isRunning;
     private ServerSocket serverSocket;
 

@@ -63,7 +63,7 @@
     <TextView
         android:id="@+id/ip_prefixTV"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:gravity="bottom"
         android:text="Your Ip and port is:"
@@ -75,9 +75,10 @@
     <TextView
         android:id="@+id/ipTV"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:gravity="top"
+        android:textIsSelectable="true"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/callCV"
@@ -89,9 +90,9 @@
         android:id="@+id/callCV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
         app:cardCornerRadius="10dp"
-        app:cardElevation="4dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +110,11 @@
                 android:text="Last request"
                 android:textAlignment="center" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#03A9F4" />
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -116,23 +122,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:weightSum="2">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/requestTV"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_margin="8dp"
-                        android:layout_weight="1" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp" />
 
                     <TextView
                         android:id="@+id/responseTV"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:layout_weight="1" />
+                        android:textIsSelectable="true" />
 
                 </LinearLayout>
 

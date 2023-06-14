@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">GeoServer</string>
+    <string name="geocoder_is_present">Geocoder is Present</string>
+    <string name="geocoder_is_not_present">Geocoder is NOT Present</string>
+    <string name="server_is_running">Server is Running</string>
+    <string name="stop_server">Stop Server</string>
+    <string name="server_is_off">Server is OFF</string>
+    <string name="start_server">Start Server</string>
+    <string name="your_ip_and_port_is">Your Ip and port is:</string>
+    <string name="last_request">Last request</string>
+    <string name="content_desc">content_desc</string>
 </resources>

@@ -113,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
     private void setUpGeocoderStatusUI() {
         if (Geocoder.isPresent()) {
             geocoderPresentIV.setImageDrawable(AppCompatResources.getDrawable(MainActivity.this, R.drawable.green_circle));
-            geocoderPresentTV.setText("Geocoder is Present");
+            geocoderPresentTV.setText(getString(R.string.geocoder_is_present));
         } else {
             geocoderPresentIV.setImageDrawable(AppCompatResources.getDrawable(MainActivity.this, R.drawable.red_circle));
-            geocoderPresentTV.setText("Geocoder is NOT Present");
+            geocoderPresentTV.setText(getString(R.string.geocoder_is_not_present));
         }
     }
 
@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity {
         boolean isRunning = isServiceRunning(this, KeepAliveService.class);
         if (isRunning) {
             serviceIV.setImageDrawable(AppCompatResources.getDrawable(MainActivity.this, R.drawable.green_circle));
-            serviceTV.setText("Server is Running");
-            serviceOnOffBTN.setText("Stop Server");
+            serviceTV.setText(getString(R.string.server_is_running));
+            serviceOnOffBTN.setText(getString(R.string.stop_server));
             serviceOnOffBTN.setTag(SERVICE_COMMANDS.STOP);
         } else {
             serviceIV.setImageDrawable(AppCompatResources.getDrawable(MainActivity.this, R.drawable.red_circle));
-            serviceTV.setText("Server is off");
-            serviceOnOffBTN.setText("Start Server");
+            serviceTV.setText(getString(R.string.server_is_off));
+            serviceOnOffBTN.setText(getString(R.string.start_server));
             serviceOnOffBTN.setTag(SERVICE_COMMANDS.START);
         }
     }
@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!address.isLoopbackAddress() && !address.isLinkLocalAddress()) {
                         String ipAddress = address.getHostAddress();
                         // Check if it is an IPv4 address
+                        assert ipAddress != null;
                         boolean isIPv4 = ipAddress.indexOf(':') < 0;
                         if (isIPv4) {
                             return ipAddress;

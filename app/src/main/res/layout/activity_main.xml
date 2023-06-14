@@ -11,7 +11,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_margin="16dp"
-        android:contentDescription="content_desc"
+        android:contentDescription="@string/content_desc"
         app:layout_constraintBottom_toTopOf="@+id/serviceIV"
         app:layout_constraintEnd_toStartOf="@+id/geocoder_presentTV"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_margin="16dp"
-        android:contentDescription="content_desc"
+        android:contentDescription="@string/content_desc"
         app:layout_constraintBottom_toTopOf="@+id/service_on_offBTN"
         app:layout_constraintEnd_toStartOf="@+id/serviceTV"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:gravity="bottom"
-        android:text="Your Ip and port is:"
+        android:text="@string/your_ip_and_port_is"
         app:layout_constraintBottom_toTopOf="@+id/ipTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="Last request"
+                android:text="@string/last_request"
                 android:textAlignment="center" />
 
             <View

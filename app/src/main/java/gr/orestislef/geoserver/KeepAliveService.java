@@ -34,8 +34,10 @@ public class KeepAliveService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
                     NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
         }
 
         // Create a pending intent for the notification
@@ -43,11 +45,15 @@ public class KeepAliveService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         // Build the notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentTitle("Server Service")
                 .setContentText("Service is running...")
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentIntent(pendingIntent);
+
+        builder.setCategory(NotificationCompat.CATEGORY_SERVICE);
+
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         return builder.build();
     }

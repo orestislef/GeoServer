@@ -243,6 +243,7 @@ public class ServerService extends Thread {
     }
 
     private boolean isInBoundMaxResults(int maxResults) {
+        //Check if maxResults is positive and is in IntRange
         return maxResults < Integer.MAX_VALUE && maxResults > 0;
     }
 

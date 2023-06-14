@@ -74,10 +74,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Start the KeepAliveService
-        Intent intent = new Intent(this, KeepAliveService.class);
-        startService(intent);
-
         TextView ipTV = findViewById(R.id.ipTV);
         String ipAndPort = getDeviceIPAddress() + ":" + ServerService.PORT;
         ipTV.setText(ipAndPort);

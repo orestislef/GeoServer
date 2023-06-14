@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LAT_KEY = "lat";
     public static final String LNG_KEY = "lng";
-    public static final String MAX_RESULTS ="max";
+    public static final String MAX_RESULTS = "max";
     public static final String RESPONSE_KEY = "response";
 
     private final BroadcastReceiver viewChangeReceiver = new BroadcastReceiver() {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             String lng = intent.getStringExtra(LNG_KEY);
             String max = intent.getStringExtra(MAX_RESULTS);
             String response = intent.getStringExtra(RESPONSE_KEY);
-            changeView(lat, lng,max, response);
+            changeView(lat, lng, max, response);
         }
     };
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeView(String lat, String lng, String max, String response) {
-        String latLng = "lat: " + lat + " lng: " + lng +" maxResults: "+max;
+        String latLng = "lat: " + lat + " lng: " + lng + " maxResults: " + max;
         requestTV.setText(latLng);
 
         responseTV.setText(response);

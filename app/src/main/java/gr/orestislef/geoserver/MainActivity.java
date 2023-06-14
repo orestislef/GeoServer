@@ -37,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
             // Handle the broadcast and change the view accordingly
             String lat = intent.getStringExtra(LAT_KEY);
             String lng = intent.getStringExtra(LNG_KEY);
+            String max = intent.getStringExtra(MAX_RESULTS);
             String response = intent.getStringExtra(RESPONSE_KEY);
-            changeView(lat, lng, response);
+            changeView(lat, lng,max, response);
         }
     };
 
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(viewChangeReceiver);
     }
 
-    private void changeView(String lat, String lng, String response) {
-        String latLng = "lat: " + lat + "lng: " + lng;
+    private void changeView(String lat, String lng, String max, String response) {
+        String latLng = "lat: " + lat + " lng: " + lng +" maxResults: "+max;
         requestTV.setText(latLng);
 
         responseTV.setText(response);

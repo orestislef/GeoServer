@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ServerService extends Thread {
-
     Context context;
 
     public ServerService(Context context) {
@@ -124,10 +123,10 @@ public class ServerService extends Thread {
 
                         JSONArray jsonArray = new JSONArray();
                         for (int i = 0; i < address.size(); i++) {
-                            jsonArray.put(i,address.get(i));
+                            jsonArray.put(i, address.get(i));
                         }
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("address",jsonArray);
+                        jsonObject.put("address", jsonArray);
 
                         // Convert the JSONArray to a JSON string
                         String jsonResponse = jsonObject.toString();
@@ -148,6 +147,7 @@ public class ServerService extends Thread {
                         Intent intent = new Intent("com.example.ACTION_VIEW_CHANGE");
                         intent.putExtra(MainActivity.LAT_KEY, Double.toString(jsonParams.getDouble(MainActivity.LAT_KEY)));
                         intent.putExtra(MainActivity.LNG_KEY, Double.toString(jsonParams.getDouble(MainActivity.LNG_KEY)));
+                        intent.putExtra(MainActivity.MAX_RESULTS, Integer.toString(jsonParams.getInt(MainActivity.MAX_RESULTS)));
                         intent.putExtra(MainActivity.RESPONSE_KEY, jsonResponse);
 
                         // Send the broadcast

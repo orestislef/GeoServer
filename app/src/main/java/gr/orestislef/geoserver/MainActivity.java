@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LAT_KEY = "lat";
     public static final String LNG_KEY = "lng";
+    public static final String MAX_RESULTS ="max";
     public static final String RESPONSE_KEY = "response";
 
     private final BroadcastReceiver viewChangeReceiver = new BroadcastReceiver() {

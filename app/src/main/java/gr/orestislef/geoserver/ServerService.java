@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +14,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ServerService extends Thread {
@@ -100,33 +104,45 @@ public class ServerService extends Thread {
                         }
 
                         Geocoder geocoder = new Geocoder(context);
-                        List<Address> addressList = geocoder.getFromLocation(jsonParams.getDouble("lat"), jsonParams.getDouble("lng"), 1);
-                        String address;
+                        List<Address> addressList =
+                                geocoder.getFromLocation(
+                                        jsonParams.getDouble(MainActivity.LAT_KEY),
+                                        jsonParams.getDouble(MainActivity.LNG_KEY),
+                                        jsonParams.getInt(MainActivity.MAX_RESULTS));
+                        List<String> address = new ArrayList<>();
                         if (addressList.size() > 0) {
-                            address = addressList.get(0).getAddressLine(0);
+                            for (int i = 0; i < addressList.size(); i++) {
+                                address.add(addressList.get(i).getAddressLine(0));
+                            }
                         } else {
-                            address = "No address";
+                            address.add("No address");
                         }
 
                         String responseHeaders = "HTTP/1.1 200 OK\r\n" +
                                 "Content-Type: application/json\r\n" +
                                 "Connection: close\r\n\r\n";
 
+                        JSONArray jsonArray = new JSONArray();
+                        for (int i = 0; i < address.size(); i++) {
+                            jsonArray.put(i,address.get(i));
+                        }
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("address",jsonArray);
 
-                        JSONObject jsonParams2 = new JSONObject();
-                        jsonParams2.put("address", address);
+                        // Convert the JSONArray to a JSON string
+                        String jsonResponse = jsonObject.toString();
+                        byte[] bytes = jsonResponse.getBytes(StandardCharsets.UTF_8);
 
-                        // Convert the JSONObject to a JSON string
-                        String jsonResponse = jsonParams2.toString();
-
-                        // Prepare the response with the JSON string
-                        String response = responseHeaders + jsonResponse;
+                        // Prepare the response with the headers and bytes
+                        byte[] response = new byte[responseHeaders.length() + bytes.length];
+                        System.arraycopy(responseHeaders.getBytes(), 0, response, 0, responseHeaders.length());
+                        System.arraycopy(bytes, 0, response, responseHeaders.length(), bytes.length);
 
                         // Send the response back to the client
                         OutputStream outputStream = clientSocket.getOutputStream();
-                        outputStream.write(response.getBytes());
+                        outputStream.write(response);
                         outputStream.flush();
-                        System.out.println("Sent response: " + response);
+                        System.out.println("Sent response: " + Arrays.toString(response));
 
                         // Create an intent with the broadcast action
                         Intent intent = new Intent("com.example.ACTION_VIEW_CHANGE");
@@ -146,4 +162,5 @@ public class ServerService extends Thread {
             e.printStackTrace();
         }
     }
+
 }

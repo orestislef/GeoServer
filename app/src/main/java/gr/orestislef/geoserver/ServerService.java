@@ -130,9 +130,9 @@ public class ServerService extends Thread {
 
                         // Create an intent with the broadcast action
                         Intent intent = new Intent("com.example.ACTION_VIEW_CHANGE");
-                        intent.putExtra("lat", Double.toString(jsonParams.getDouble("lat")));
-                        intent.putExtra("lng", Double.toString(jsonParams.getDouble("lat")));
-                        intent.putExtra("response", jsonResponse);
+                        intent.putExtra(MainActivity.LAT_KEY, Double.toString(jsonParams.getDouble(MainActivity.LAT_KEY)));
+                        intent.putExtra(MainActivity.LNG_KEY, Double.toString(jsonParams.getDouble(MainActivity.LNG_KEY)));
+                        intent.putExtra(MainActivity.RESPONSE_KEY, jsonResponse);
 
                         // Send the broadcast
                         context.sendBroadcast(intent);

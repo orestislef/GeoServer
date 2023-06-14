@@ -6,6 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/geocoder_presentIV"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_margin="16dp"
+        android:contentDescription="content_desc"
+        app:layout_constraintBottom_toTopOf="@+id/serviceIV"
+        app:layout_constraintEnd_toStartOf="@+id/geocoder_presentTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/geocoder_presentTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/geocoder_presentIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/geocoder_presentIV"
+        app:layout_constraintTop_toTopOf="@+id/geocoder_presentIV" />
+
+
+    <ImageView
+        android:id="@+id/serviceIV"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_margin="16dp"
+        android:contentDescription="content_desc"
+        app:layout_constraintBottom_toTopOf="@+id/service_on_offBTN"
+        app:layout_constraintEnd_toStartOf="@+id/serviceTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geocoder_presentIV" />
+
+    <TextView
+        android:id="@+id/serviceTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/serviceIV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/serviceIV"
+        app:layout_constraintTop_toTopOf="@+id/serviceIV" />
+
+    <Button
+        android:id="@+id/service_on_offBTN"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/ip_prefixTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/serviceIV" />
+
     <TextView
         android:id="@+id/ip_prefixTV"
         android:layout_width="wrap_content"
@@ -16,7 +70,7 @@
         app:layout_constraintBottom_toTopOf="@+id/ipTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/service_on_offBTN" />
 
     <TextView
         android:id="@+id/ipTV"
@@ -47,19 +101,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/requestTV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/responseTV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp" />
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
+                android:layout_weight="1" />
 
         </LinearLayout>
 

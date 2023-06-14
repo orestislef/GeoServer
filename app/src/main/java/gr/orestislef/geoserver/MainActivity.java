@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String LAT_KEY = "lat";
     public static final String LNG_KEY = "lng";
-    public static final String MAX_RESULTS = "max";
+    public static final String MAX_RESULTS_KEY = "max";
+    public static final String ADDRESS_KEY = "address";
+    public static final String LOCATION_KEY = "location";
     public static final String RESPONSE_KEY = "response";
 
     private final BroadcastReceiver viewChangeReceiver = new BroadcastReceiver() {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             // Handle the broadcast and change the view accordingly
             String lat = intent.getStringExtra(LAT_KEY);
             String lng = intent.getStringExtra(LNG_KEY);
-            String max = intent.getStringExtra(MAX_RESULTS);
+            String max = intent.getStringExtra(MAX_RESULTS_KEY);
             String response = intent.getStringExtra(RESPONSE_KEY);
             changeView(lat, lng, max, response);
         }

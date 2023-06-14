@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class ServerService extends Thread {
     Context context;
@@ -114,8 +115,21 @@ public class ServerService extends Thread {
                                 break;
                             }
                         }
+                        boolean foundLocaleKey = false;
+                        for (String mParam : getJSONKeys(jsonParams)) {
+                            if (mParam.equals(MainActivity.LOCALE_KEY)) {
+                                foundLocaleKey = true;
+                                break;
+                            }
+                        }
+                        Geocoder geocoder;
+                        if (foundLocaleKey) {
+                            Locale locale = new Locale(jsonParams.getString(MainActivity.LOCALE_KEY));
+                            geocoder = new Geocoder(context, locale);
+                        } else
+                            geocoder = new Geocoder(context);
+
                         if (foundAddressKey) {
-                            Geocoder geocoder = new Geocoder(context);
                             List<Address> addressList = geocoder.getFromLocationName(jsonParams.getString(MainActivity.ADDRESS_KEY), jsonParams.getInt(MainActivity.MAX_RESULTS_KEY));
                             List<MyLocation> address = new ArrayList<>();
                             if (addressList.size() > 0) {
@@ -163,8 +177,6 @@ public class ServerService extends Thread {
                             context.sendBroadcast(intent);
 
                         } else {
-                            Geocoder geocoder = new Geocoder(context);
-
                             List<Address> addressList;
                             if (!isInBoundLatLng(
                                     jsonParams.getDouble(MainActivity.LAT_KEY),

@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         START, STOP
     }
 
+    public static final String LOCALE_KEY = "locale";
     public static final String LAT_KEY = "lat";
     public static final String LNG_KEY = "lng";
     public static final String MAX_RESULTS_KEY = "max";

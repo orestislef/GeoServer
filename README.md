@@ -49,3 +49,6 @@ returns location with address names and lats lngs
 >         }
 >       ] 
 >     }
+
+## in eny request you can add a locale param 
+example 3: http://<IP:PORT>?lat=40.631165&lng=22.945489&max=5&locale=el

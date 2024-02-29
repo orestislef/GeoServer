@@ -1,54 +1,59 @@
 # GeoServer
-Is an android app that runs a service like server
-and if you make a request to phones IP:PORT with GET method
 
-### In main app screen on top you have 2 boubles -> Green/Red light with text that tells you is everything is ok
+GeoServer is an Android app that functions as a server. When a request is made to the phone's IP:PORT using the GET method, it performs certain actions.
 
-### Next you have a button to START/STOP server
+## Main App Screen:
 
-### IP:PORT can be found on mid of screen
+- On the top, there are 2 bubbles: Green/Red light with text indicating whether everything is okay.
+- A button is provided to START/STOP the server.
+- IP:PORT information is displayed in the middle of the screen.
+- The last request is shown at the bottom.
 
-### At the bottom you can see the last request
+## Request Examples:
 
+### Example 1:
 
-example 1: http://<IP:PORT>/?lat=40.631165&lng=22.945489&max=5
+- URL: `http://<IP:PORT>/?lat=40.631165&lng=22.945489&max=5`
+- Parameters:
+  - `lat`
+  - `lng`
+  - `max`
+- Returns address names:
 
-with params:  
-> * lat, 
-> * lng, 
-> * max 
+```json
+{
+  "address": [
+    "π.μελλα, Τσιμισκή, Θεσσαλονίκη 546 22, Ελλάδα",
+    "Τσιμισκή 79, Θεσσαλονίκη 546 22, Ελλάδα",
+    "Ικτίνου 2, Θεσσαλονίκη 546 22, Ελλάδα",
+    "Τσιμισκή 79-65, Θεσσαλονίκη 546 22, Ελλάδα",
+    "Θεσσαλονίκη 546 22, Ελλάδα"
+  ]
+}
+```
 
-returns address names
+### Example 2:
 
->     {
->      "address": [
->          "π.μελλα, Τσιμισκή, Θεσσαλονίκη 546 22, Ελλάδα",
->          "Τσιμισκή 79, Θεσσαλονίκη 546 22, Ελλάδα",
->          "Ικτίνου 2, Θεσσαλονίκη 546 22, Ελλάδα",
->          "Τσιμισκή 79-65, Θεσσαλονίκη 546 22, Ελλάδα",
->          "Θεσσαλονίκη 546 22, Ελλάδα"
->       ]
->     }
+- URL: `http://<IP:PORT>/?address=karaikskaki%2027%20sykies&max=5`
+- Parameters:
+  - `address`
+  - `max`
+- Returns location with address names and latitudes/longitudes:
 
-------------------
+```json
+{
+  "location": [
+    {
+      "address": "Καραϊσκάκη, Συκιές 566 26, Ελλάδα",
+      "lat": 40.6464861,
+      "lng": 22.9647357
+    }
+  ]
+}
+```
 
-example 2: http://<IP:PORT>/?address=karaikskaki%2027%20sykies&max=5
+## Additional Parameter:
 
-with params:  
-> * address, 
-> * max 
+In any request, you can add a `locale` parameter.
 
-returns location with address names and lats lngs
-
->     {
->       "location": [
->         {
->            "address": "Καραϊσκάκη, Συκιές 566 26, Ελλάδα",
->            "lat": 40.6464861,
->            "lng": 22.9647357
->         }
->       ] 
->     }
-
-## in eny request you can add a locale param 
-example 3: http://<IP:PORT>?lat=40.631165&lng=22.945489&max=5&locale=el
+Example 3: `http://<IP:PORT>?lat=40.631165&lng=22.945489&max=5&locale=el`
